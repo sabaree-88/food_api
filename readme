@@ -1,0 +1,2 @@
+install node_modules: npm install
+run the project: npm run dev
