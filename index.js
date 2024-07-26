@@ -35,7 +35,7 @@ app.use("/food", foodRoute);
 const PORT = process.env.PORT;
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   app.listen(PORT, () => {
-    console.log(`App is running: http://localhost:${PORT}`);
+    console.log(`App running`);
   });
   console.log("Database Connected");
 });

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, {
-    expiresIn:"1d",
+    expiresIn: "1d",
   });
 };
 
@@ -32,5 +32,26 @@ export const SignUp = async (req, res) => {
     res.status(201).json({ user: { _id: user._id, email: user.email }, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const result = await User.find({});
+    return res.status(200).send({ result });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+export const getUsersById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await User.findById(id);
+    if (!result) {
+      res.status(400).send({ message: "User not found!" });
+    }
+    return res.status(200).send({ result });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
 };
