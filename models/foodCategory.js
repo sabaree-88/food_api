@@ -7,7 +7,7 @@ const foodCategory = mongoose.Schema({
   },
   category_image: {
     type: String,
-    default: null,
+    required: true,
   },
 });
 

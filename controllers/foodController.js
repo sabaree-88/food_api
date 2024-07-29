@@ -55,7 +55,7 @@ export const viewFoodByID = async (req, res) => {
 };
 
 export const addFood = async (req, res) => {
-  upload.single("image")(req, res, async (err) => {
+  upload.single("food_image")(req, res, async (err) => {
     if (err) {
       return res.status(400).send({ message: err.message });
     }
@@ -80,7 +80,7 @@ export const addFood = async (req, res) => {
 };
 
 export const updateFood = async (req, res) => {
-  upload.single("image")(req, res, async (err) => {
+  upload.single("food_image")(req, res, async (err) => {
     if (err) {
       return res.status(400).send({ message: err.message });
     }

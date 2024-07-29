@@ -47,7 +47,7 @@ export const viewCategoryByID = async (req, res) => {
 };
 
 export const addCategory = async (req, res) => {
-  upload.single("image")(req, res, async (err) => {
+  upload.single("category_image")(req, res, async (err) => {
     if (err) {
       return res.status(400).send({ message: err.message });
     }
@@ -66,7 +66,7 @@ export const addCategory = async (req, res) => {
 };
 
 export const updateCategory = async (req, res) => {
-  upload.single("image")(req, res, async (err) => {
+  upload.single("category_image")(req, res, async (err) => {
     if (err) {
       return res.status(400).send({ message: err.message });
     }
@@ -75,7 +75,7 @@ export const updateCategory = async (req, res) => {
       const { category_name } = req.body();
       const updateCategory = { category_name };
       if (req.file) {
-        updateCategory.category_image = `http://localhost:8080/public/image/category/${req.file.filename}`;
+        updateCategory.category_image = `/public/image/category/${req.file.filename}`;
       }
       const result = await Category.findByIdAndUpdate(id, updateCategory, {
         new: true,
