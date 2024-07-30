@@ -72,7 +72,7 @@ export const updateCategory = async (req, res) => {
     }
     try {
       const { id } = req.params;
-      const { category_name } = req.body();
+      const { category_name } = req.body;
       const updateCategory = { category_name };
       if (req.file) {
         updateCategory.category_image = `/public/image/category/${req.file.filename}`;
