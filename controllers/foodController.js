@@ -127,3 +127,18 @@ export const deleteFood = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const addfavorite = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const food = await Food.findById(id);
+    if (!food) {
+      return res.status(404).send({ message: "Food not found" });
+    }
+    food.favorite = !food.favorite;
+    await food.save();
+    res.send({ message: "Favorite status updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Error updating favorite status" });
+  }
+};

@@ -20,6 +20,10 @@ const food = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "food_category",
   },
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const Food = mongoose.model("food", food);
