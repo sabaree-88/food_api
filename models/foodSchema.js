@@ -24,6 +24,10 @@ const food = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  popular: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const Food = mongoose.model("food", food);

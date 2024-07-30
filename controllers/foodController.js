@@ -60,12 +60,14 @@ export const addFood = async (req, res) => {
       return res.status(400).send({ message: err.message });
     }
     try {
-      const { food_name, food_price, food_description, category_id } = req.body;
+      const { food_name, food_price, food_description, category_id, popular } =
+        req.body;
       const newFood = {
         food_name,
         food_price,
         food_description,
         category_id: category_id,
+        popular,
       };
       if (req.file) {
         newFood.food_image = `/public/image/food/${req.file.filename}`;
@@ -86,12 +88,14 @@ export const updateFood = async (req, res) => {
     }
     try {
       const { id } = req.params;
-      const { food_name, food_price, food_description, category_id } = req.body;
+      const { food_name, food_price, food_description, category_id, popular } =
+        req.body;
       const updateFood = {
         food_name,
         food_price,
         food_description,
         category_id: category_id,
+        popular,
       };
       if (req.file) {
         updateFood.food_image = `public/image/food/${req.file.filename}`;
@@ -128,7 +132,7 @@ export const deleteFood = async (req, res) => {
   }
 };
 
-export const addfavorite = async (req, res) => {
+export const addFavorite = async (req, res) => {
   const { id } = req.params;
   try {
     const food = await Food.findById(id);
@@ -140,5 +144,33 @@ export const addfavorite = async (req, res) => {
     res.send({ message: "Favorite status updated successfully" });
   } catch (error) {
     res.status(500).send({ message: "Error updating favorite status" });
+  }
+};
+
+export const getFavoriteFoods = async (req, res) => {
+  try {
+    const favoriteFoods = await Food.find({ favorite: true }).populate({
+      path: "category_id",
+      model: "food_category",
+      strictPopulate: false,
+    });
+    return res.status(200).send(favoriteFoods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const getPopularFoods = async (req, res) => {
+  try {
+    const popularFoods = await Food.find({ popular: true }).populate({
+      path: "category_id",
+      model: "food_category",
+      strictPopulate: false,
+    });
+    return res.status(200).send(popularFoods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: error.message });
   }
 };
