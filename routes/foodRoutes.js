@@ -1,6 +1,6 @@
 import { Router } from "express";
-import Auth from "../middleware/authMiddleware.js";
-import adminAuth from "../middleware/adminAuth.js";
+// import Auth from "../middleware/authMiddleware.js";
+// import adminAuth from "../middleware/adminAuth.js";
 import {
   viewFood,
   viewFoodByID,
