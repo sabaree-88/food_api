@@ -26,7 +26,7 @@ const food = mongoose.Schema({
   },
   popular: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
