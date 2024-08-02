@@ -25,9 +25,8 @@ const food = mongoose.Schema({
     default: false,
   },
   popular: {
-    type: String,
-    enum: ['yes', 'no'],
-    default: null
+    type: Boolean,
+    default: false,
   },
 });
 
