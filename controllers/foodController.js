@@ -174,3 +174,46 @@ export const getPopularFoods = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const searchFood = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const result = await Food.aggregate([
+      {
+        $lookup: {
+          from: "food_categories",
+          localField: "category_id",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $unwind: "$category",
+      },
+      {
+        $match: {
+          $or: [
+            { food_name: { $regex: query, $options: "i" } },
+            { "category.category_name": { $regex: query, $options: "i" } },
+          ],
+        },
+      },
+      {
+        $project: {
+          food_name: 1,
+          food_price: 1,
+          food_description: 1,
+          category_id: 1,
+          favorite: 1,
+          popular: 1,
+          food_image: 1,
+          category_name: "$category.category_name",
+        },
+      },
+    ]);
+
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: "Error searching for food", error });
+  }
+};

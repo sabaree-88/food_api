@@ -10,6 +10,7 @@ import {
   getFavoriteFoods,
   addFavorite,
   getPopularFoods,
+  searchFood,
 } from "../controllers/foodController.js";
 
 const foodRoute = Router();
@@ -19,6 +20,7 @@ foodRoute.get("/view-food/:id", viewFoodByID);
 foodRoute.patch("/favorite/:id", addFavorite);
 foodRoute.get("/get-favorite", getFavoriteFoods);
 foodRoute.get("/get-popular_foods", getPopularFoods);
+foodRoute.get("/search-food-category", searchFood);
 // foodRoute.use(Auth);
 foodRoute.post("/add-food", addFood);
 foodRoute.put("/edit-food/:id", updateFood);
