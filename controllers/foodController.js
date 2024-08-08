@@ -98,7 +98,7 @@ export const updateFood = async (req, res) => {
         popular,
       };
       if (req.file) {
-        updateFood.food_image = `public/image/food/${req.file.filename}`;
+        updateFood.food_image = `/public/image/food/${req.file.filename}`;
       }
       const result = await Food.findByIdAndUpdate(id, updateFood, {
         new: true,
